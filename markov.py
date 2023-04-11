@@ -9,10 +9,9 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-
-    # your code goes here
-
-    return 'Contents of your file as one long string'
+    contents = open(file_path).read()
+    print(contents)
+    return contents
 
 
 def make_chains(text_string):
@@ -42,9 +41,21 @@ def make_chains(text_string):
 
     chains = {}
 
-    # your code goes here
+    lst = text_string.split()
+    
+    for i in range(len(lst) - 2):
+        word1 = lst[i]
+        word2 = lst[i + 1]
+        value = chains.get((word1, word2), [])
+        if len(value) != 0:
+            value.append(lst[i + 2])
+        else: 
+            chains[(word1, word2)] = [lst[i + 2]]
 
-    return chains
+
+    for key in sorted(chains):
+        print(key, chains[key])
+    return sorted(chains)
 
 
 def make_text(chains):
