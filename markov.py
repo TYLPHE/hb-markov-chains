@@ -10,7 +10,7 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
     contents = open(file_path).read()
-    print(contents)
+    # print(contents)
     return contents
 
 
@@ -55,20 +55,32 @@ def make_chains(text_string):
 
     for key in sorted(chains):
         print(key, chains[key])
-    return sorted(chains)
+    # print(type(sorted(chains)))
+    return chains
 
 
 def make_text(chains):
     """Return text from chains."""
 
     words = []
+    lst = list(chains.keys())
+    random_key = choice(lst)
+    
+    words.append(random_key[0])
+    words.append(random_key[1])
 
-    # your code goes here
+    while chains.get(random_key):
+        random_word = choice(chains[random_key]) 
+        words.append(random_word)
+
+        random_key = (random_key[1], random_word)
+
+    # print(words)
 
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = 'gettysburg.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
